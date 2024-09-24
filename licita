@@ -1,1 +1,51 @@
+import java.util.Scanner;
+import java.util.Random;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        int pessoas;
+        String processo;
+
+        //construtor
+
+        Scanner entrada = new Scanner(System.in);
+        Scanner people = new Scanner(System.in);
+        //Scanner cnpj = new Scanner(System.in);
+
+        System.out.println("\nSistema de Sorteio \n");
+        System.out.println("Tipo e nº do processo licitatório? ");
+        processo = entrada.nextLine();
+
+        System.out.println("\nQuantas empresas vão participar do sorteio?");
+        pessoas = entrada.nextInt();
+
+
+        // Definindo o tamanho do vetor
+        String[][] empresas = new String[pessoas][2];
+
+        // Cadastro das empresas
+        for (int i = 0; i < pessoas; i++) {
+            System.out.println("\nDigite o nome da empresa " + (i + 1) + ":");
+            empresas[i][0] = scanner.nextLine();
+            System.out.println("Digite o CNPJ da empresa " + (i + 1) + ":");
+            empresas[i][1] = scanner.nextLine();
+        }
+
+        // Sorteio da empresa vencedora
+        int indiceVencedor = random.nextInt(pessoas);
+        System.out.println();
+        System.out.println(processo);
+        LocalDateTime agora = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String dataFormatada = agora.format(formatter);
+        System.out.println("Data e hora: " + dataFormatada);
+        System.out.println("A empresa vencedora é: " + empresas[indiceVencedor][0] + " com o CNPJ: " + empresas[indiceVencedor][1]);
+
+        scanner.close();
+    }
+}
